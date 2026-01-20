@@ -1,18 +1,23 @@
-$fn        = 100;
+// --- config --- //
+$fn       = 100;
+pcb_thick = 1.2;
+insert_d  = 3.5;
+screw_l   = 6;
+extra_h   = 5;
+thick     = 2.5;
+// -------------- //
+
 pcb_l      = 244;
 pcb_w      = 92;
-pcb_thick  = 1.2;
 margin     = 0.5;
-thick      = 2.5;
-extra_h    = 5;
-rod_h      = 8;
-rod_r      = 2.5;
-rod_thin_r = 1;
-hole_r     = 1.6 / 2;
-screw_l    = 6;
+rod_hole_r = (3.5 - 0.2) / 2;
+rod_hole_l = screw_l + 2;
+rod_h      = rod_hole_l + 2;
+rod_r      = rod_hole_r + 2;
+rod_thin_r = 1.5;
 round_r    = 2;
 wall_l     = 5 + margin;
-wall_thick = 1;
+wall_thick = 1.5;
 wall_h_pos = [
     [0, 55.5],
     [pcb_l + (2 * margin) - wall_l, 55.5]
@@ -75,8 +80,8 @@ module rod(x, y) {
     translate([x, y, thick])
         difference() {
             cylinder(r = rod_r, h = rod_h);
-            translate([0, 0, rod_h - screw_l + 0.1])
-                cylinder(r = hole_r, h = screw_l);
+            translate([0, 0, rod_h - rod_hole_l + 0.1])
+                cylinder(r = rod_hole_r, h = rod_hole_l);
         }
 }
 
