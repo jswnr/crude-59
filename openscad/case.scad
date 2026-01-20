@@ -1,6 +1,7 @@
 $fn        = 100;
 pcb_l      = 244;
 pcb_w      = 92;
+pcb_thick  = 1.2;
 margin     = 0.5;
 thick      = 2.5;
 extra_h    = 5;
@@ -21,7 +22,7 @@ wall_v_pos = [
     [111, 0],
     [187, 0],
     [84, pcb_w + (2 * margin) - wall_l],
-    [149, pcb_w + (2 * margin) - wall_l]
+    [149, pcb_w + (2 * margin) - wall_l],
 ];
 rod_pos = [
     [17.5, 17.5],
@@ -42,15 +43,15 @@ rod_thin_pos = [
     [36.5, 36.5]
 
 ];
-usb_pos = [226, pcb_w, thick + rod_h];
-usb_size = [15, thick + 3, extra_h];
+usb_pos = [226, pcb_w, thick + rod_h + pcb_thick];
+usb_size = [15, thick + 10, extra_h + 10];
 
 module box() {
     minkowski() {
         cube([
             pcb_l + (2 * margin) + (2 * thick) - (2 * round_r),
             pcb_w + (2 * margin) + (2 * thick) - (2 * round_r),
-            thick + rod_h + extra_h - 2
+            thick + rod_h + pcb_thick + extra_h - 1
         ]);
         cylinder(r = round_r, h = 1);
     }
@@ -61,7 +62,7 @@ module cavity() {
         cube([
             pcb_l + (2 * margin),
             pcb_w + (2 * margin),
-            rod_h + extra_h
+            rod_h + extra_h + 10
         ]);
     
     translate([(usb_pos[0] + margin) - (usb_size[0] / 2),
