@@ -1,15 +1,28 @@
-$fn = 100;
-pcb_l        = 244;
-pcb_w        = 92;
-margin       = 0.5;
-thick        = 2.5;
-extra_h      = 5;
-rod_h        = 10;
-rod_r        = 3;
-rod_thin_r   = 1.5;
-hole_r       = 1.6 / 2;
-screw_l      = 7;
-round_r      = 2;
+$fn        = 100;
+pcb_l      = 244;
+pcb_w      = 92;
+margin     = 0.5;
+thick      = 2.5;
+extra_h    = 5;
+rod_h      = 8;
+rod_r      = 2.5;
+rod_thin_r = 1;
+hole_r     = 1.6 / 2;
+screw_l    = 6;
+round_r    = 2;
+wall_l     = 5 + margin;
+wall_thick = 1;
+wall_h_pos = [
+    [0, 55.5],
+    [pcb_l + (2 * margin) - wall_l, 55.5]
+];
+wall_v_pos = [
+    [46, 0],
+    [111, 0],
+    [187, 0],
+    [84, pcb_w + (2 * margin) - wall_l],
+    [149, pcb_w + (2 * margin) - wall_l]
+];
 rod_pos = [
     [17.5, 17.5],
     [74.5, 17.5],
@@ -18,7 +31,7 @@ rod_pos = [
     [74.5, 55.5],
     [150.5, 55.5],
     [17.5, 74.5],
-    [210.5, 67.5],
+    [210.5, 67.5]
 ];
 rod_thin_pos = [
     [169.5, 74.5],
@@ -76,6 +89,14 @@ translate([-(pcb_l / 2), -(pcb_w / 2), 0])
         difference() {
             box();
             cavity();
+        }
+        for (w = wall_h_pos) {
+            translate([w[0], w[1] + margin, thick])
+                cube([wall_l, wall_thick, rod_h]);
+        }
+        for (w = wall_v_pos) {
+            translate([w[0] + margin, w[1], thick])
+                cube([wall_thick, wall_l, rod_h]);
         }
         for (r = rod_pos) {
             rod(r[0] + margin, r[1] + margin);
