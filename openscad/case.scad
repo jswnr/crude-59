@@ -2,7 +2,7 @@
 $fn       = 100;
 pcb_thick = 1.2;
 insert_d  = 3.5;
-screw_l   = 6;
+thread_l  = 6;
 extra_h   = 5;
 thick     = 2.5;
 // -------------- //
@@ -10,13 +10,11 @@ thick     = 2.5;
 pcb_l      = 244;
 pcb_w      = 92;
 margin     = 0.5;
-rod_hole_r = (3.5 - 0.2) / 2;
-rod_hole_l = screw_l + 2;
-rod_h      = rod_hole_l + 2;
+rod_hole_r = (insert_d - 0.2) / 2;
+rod_h      = thread_l + 2;
 rod_r      = rod_hole_r + 2;
 rod_thin_r = 1.5;
-round_r    = 2;
-wall_l     = 5 + margin;
+wall_l     = 4 + margin;
 wall_thick = 1.5;
 wall_h_pos = [
     [0, 55.5],
@@ -24,10 +22,10 @@ wall_h_pos = [
 ];
 wall_v_pos = [
     [46, 0],
-    [111, 0],
-    [187, 0],
+    [110, 0],
+    [186, 0],
     [84, pcb_w + (2 * margin) - wall_l],
-    [149, pcb_w + (2 * margin) - wall_l],
+    [148, pcb_w + (2 * margin) - wall_l],
 ];
 rod_pos = [
     [17.5, 17.5],
@@ -40,13 +38,12 @@ rod_pos = [
     [210.5, 67.5]
 ];
 rod_thin_pos = [
-    [169.5, 74.5],
-    [112.5, 74.5],
-    [55.5, 74.5],
-    [188.5, 36.5],
+    [36.5, 36.5],
     [112.5, 36.5],
-    [36.5, 36.5]
-
+    [188.5, 36.5],
+    [55.5, 74.5],
+    [112.5, 74.5],
+    [169.5, 74.5]
 ];
 usb_pos = [226, pcb_w, thick + rod_h + pcb_thick];
 usb_size = [15, thick + 10, extra_h + 10];
@@ -54,11 +51,11 @@ usb_size = [15, thick + 10, extra_h + 10];
 module box() {
     minkowski() {
         cube([
-            pcb_l + (2 * margin) + (2 * thick) - (2 * round_r),
-            pcb_w + (2 * margin) + (2 * thick) - (2 * round_r),
+            pcb_l + (2 * margin),
+            pcb_w + (2 * margin),
             thick + rod_h + pcb_thick + extra_h - 1
         ]);
-        cylinder(r = round_r, h = 1);
+        cylinder(r = thick, h = 1);
     }
 }
 
@@ -80,8 +77,8 @@ module rod(x, y) {
     translate([x, y, thick])
         difference() {
             cylinder(r = rod_r, h = rod_h);
-            translate([0, 0, rod_h - rod_hole_l + 0.1])
-                cylinder(r = rod_hole_r, h = rod_hole_l);
+            translate([0, 0, rod_h - rod_h + 0.1])
+                cylinder(r = rod_hole_r, h = rod_h);
         }
 }
 
