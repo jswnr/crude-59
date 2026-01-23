@@ -7,16 +7,18 @@ extra_h   = 5;
 thick     = 2.5;
 // -------------- //
 
-pcb_l      = 244;
-pcb_w      = 92;
-margin     = 0.5;
-rod_hole_r = (insert_d - 0.2) / 2;
-rod_h      = thread_l + 2;
-rod_r      = rod_hole_r + 2;
-rod_thin_r = 1.5;
-wall_l     = 4 + margin;
-wall_thick = 1.5;
-wall_h_pos = [
+pcb_l        = 244;
+pcb_w        = 92;
+margin       = 0.5;
+rod_hole_r   = (insert_d - 0.2) / 2;
+rod_h        = thread_l + 2;
+rod_r        = rod_hole_r + 2;
+rod_thin_r   = 1.5;
+gusset_l     = 3;
+gusset_thick = 1;
+wall_l       = 4 + margin;
+wall_thick   = 1.5;
+wall_h_pos   = [
     [0, 55.5],
     [pcb_l + (2 * margin) - wall_l, 55.5]
 ];
@@ -73,18 +75,48 @@ module cavity() {
         cube(usb_size);
 }
 
+module gusset(rod_r, n) {
+    triangle = [
+        [0, 0],
+        [rod_h, 0],
+        [0, gusset_l]
+    ];
+
+    rotate([0, 0, 45 + (n * 90)])
+        union() {
+            translate([(gusset_thick / 2), rod_r, 0])
+                rotate([0, -90, 0])
+                    linear_extrude(height = gusset_thick)
+                        polygon(points = triangle);
+            translate([-(gusset_thick / 2), 0, 0])
+                cube([gusset_thick, rod_r, rod_h]);
+        }
+}
+
+module rod_support(rod_r) {
+    for (n = [0:3]) {
+        gusset(rod_r, n);
+    }
+}
+
 module rod(x, y) {
     translate([x, y, thick])
         difference() {
-            cylinder(r = rod_r, h = rod_h);
-            translate([0, 0, rod_h - rod_h + 0.1])
+            union () {
+                cylinder(r = rod_r, h = rod_h);
+                rod_support(rod_r);
+            }
+            translate([0, 0, rod_h - rod_h + 0.01])
                 cylinder(r = rod_hole_r, h = rod_h);
         }
 }
 
 module rod_thin(x, y) {
     translate([x, y, thick])
-        cylinder(r = rod_thin_r, h = rod_h);
+        union() {
+            cylinder(r = rod_thin_r, h = rod_h);
+            rod_support(rod_thin_r);
+        }
 }
 
 translate([-(pcb_l / 2), -(pcb_w / 2), 0])
