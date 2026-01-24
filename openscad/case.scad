@@ -1,24 +1,24 @@
 // --- config --- //
-$fn       = 100;
-pcb_thick = 1.2;
-insert_d  = 3.5;
-thread_l  = 6;
-extra_h   = 5;
-thick     = 2.5;
+$fn      = 100;
+pcb_t    = 1.2;
+insert_d = 3.5;
+thread_l = 6;
+extra_h  = 5;
+case_t   = 2.5;
 // -------------- //
 
-pcb_l        = 244;
-pcb_w        = 92;
-margin       = 0.5;
-rod_hole_r   = (insert_d - 0.3) / 2;
-rod_h        = thread_l + 2;
-rod_r        = rod_hole_r + 2;
-rod_thin_r   = 1.5;
-gusset_l     = 3;
-gusset_thick = 1;
-wall_l       = 4 + margin;
-wall_thick   = 1.5;
-wall_h_pos   = [
+pcb_l      = 244;
+pcb_w      = 92;
+margin     = 0.5;
+rod_hole_r = (insert_d - 0.2) / 2;
+rod_h      = thread_l + 2;
+rod_r      = rod_hole_r + 2;
+rod_thin_r = 1.5;
+gusset_l   = 3;
+gusset_t   = 1;
+wall_l     = 4 + margin;
+wall_t     = 1.5;
+wall_h_pos = [
     [0, 55.5],
     [pcb_l + (2 * margin) - wall_l, 55.5]
 ];
@@ -47,22 +47,22 @@ rod_thin_pos = [
     [112.5, 74.5],
     [169.5, 74.5]
 ];
-usb_pos = [226, pcb_w, thick + rod_h + pcb_thick];
-usb_size = [15, thick + 10, extra_h + 10];
+usb_pos = [226, pcb_w, case_t + rod_h + pcb_t];
+usb_size = [15, case_t + 10, extra_h + 10];
 
 module box() {
     minkowski() {
         cube([
             pcb_l + (2 * margin),
             pcb_w + (2 * margin),
-            thick + rod_h + pcb_thick + extra_h - 1
+            case_t + rod_h + pcb_t + extra_h - 1
         ]);
-        cylinder(r = thick, h = 1);
+        cylinder(r = case_t, h = 1);
     }
 }
 
 module cavity() {
-    translate([0, 0, thick])
+    translate([0, 0, case_t])
         cube([
             pcb_l + (2 * margin),
             pcb_w + (2 * margin),
@@ -84,12 +84,12 @@ module gusset(rod_r, n) {
 
     rotate([0, 0, 45 + (n * 90)])
         union() {
-            translate([(gusset_thick / 2), rod_r, 0])
+            translate([(gusset_t / 2), rod_r, 0])
                 rotate([0, -90, 0])
-                    linear_extrude(height = gusset_thick)
+                    linear_extrude(height = gusset_t)
                         polygon(points = triangle);
-            translate([-(gusset_thick / 2), 0, 0])
-                cube([gusset_thick, rod_r, rod_h]);
+            translate([-(gusset_t / 2), 0, 0])
+                cube([gusset_t, rod_r, rod_h]);
         }
 }
 
@@ -100,7 +100,7 @@ module rod_support(rod_r) {
 }
 
 module rod(x, y) {
-    translate([x, y, thick])
+    translate([x, y, case_t])
         difference() {
             union () {
                 cylinder(r = rod_r, h = rod_h);
@@ -112,7 +112,7 @@ module rod(x, y) {
 }
 
 module rod_thin(x, y) {
-    translate([x, y, thick])
+    translate([x, y, case_t])
         union() {
             cylinder(r = rod_thin_r, h = rod_h);
             rod_support(rod_thin_r);
@@ -126,12 +126,12 @@ translate([-(pcb_l / 2), -(pcb_w / 2), 0])
             cavity();
         }
         for (w = wall_h_pos) {
-            translate([w[0], w[1] + margin, thick])
-                cube([wall_l, wall_thick, rod_h]);
+            translate([w[0], w[1] + margin, case_t])
+                cube([wall_l, wall_t, rod_h]);
         }
         for (w = wall_v_pos) {
-            translate([w[0] + margin, w[1], thick])
-                cube([wall_thick, wall_l, rod_h]);
+            translate([w[0] + margin, w[1], case_t])
+                cube([wall_t, wall_l, rod_h]);
         }
         for (r = rod_pos) {
             rod(r[0] + margin, r[1] + margin);
