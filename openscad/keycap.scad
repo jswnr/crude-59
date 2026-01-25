@@ -9,6 +9,8 @@ cap_t   = 1;
 // -------------- //
 
 margin     = 0.1;
+curve_r    = 25;
+curve_h    = 2;
 rod_hole_h = stem_h + 1;
 rod_h      = rod_hole_h + extra_h;
 rod_r      = (stem_l / 2) + margin + 1;
@@ -46,11 +48,17 @@ module rod_hole(stem_t) {
         );
 }
 
+
 union() {
     difference() {
-        minkowski() {
-            frustum(cavity_lb, cavity_lt, rod_h - 1);
-            cylinder(r = cap_t, h = 1);
+        difference() {
+            minkowski() {
+                frustum(cavity_lb, cavity_lt, rod_h + curve_h - 1);
+                cylinder(r = cap_t, h = 1);
+            }
+            translate([0, 0, curve_r + rod_h + cap_t])
+                rotate([90, 0, 0])
+                    cylinder(r = curve_r, h = cap_lb, center = true);
         }
         translate([0, 0, -0.01])
             frustum(cavity_lb, cavity_lt, rod_h);
