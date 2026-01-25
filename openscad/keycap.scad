@@ -5,21 +5,21 @@ stem_h  = 3.6;
 stem_th = 1.1;
 stem_tv = 1.3;
 extra_h = 4;
-cap_t   = 1;
+cap_t   = 1.2;
 // -------------- //
 
-margin     = 0.1;
-curve_r    = 25;
-curve_h    = 2;
+margin     = 0.05;
 rod_hole_h = stem_h + 1;
 rod_h      = rod_hole_h + extra_h;
-rod_r      = (stem_l / 2) + margin + 1;
+rod_r      = (stem_l / 2) + margin + 0.6;
 cap_lb     = 18;
 cap_lt     = 14;
 cavity_lb  = cap_lb - (2 * cap_t);
 cavity_lt  = cap_lt - (2 * cap_t);
 rib_t      = 0.5;
-rib_lb     = cavity_lt + ((extra_h / rod_h) * (cavity_lb -cavity_lt));
+rib_lb     = cavity_lt + ((extra_h / rod_h) * (cavity_lb - cavity_lt));
+curve_h    = 1;
+curve_r    = (curve_h + ((cap_lt / 2)^2 / curve_h)) / 2;
 
 module frustum(lb, lt, h) {
     linear_extrude(height = h, scale = lt / lb) {
@@ -48,15 +48,14 @@ module rod_hole(stem_t) {
         );
 }
 
-
 union() {
     difference() {
         difference() {
             minkowski() {
-                frustum(cavity_lb, cavity_lt, rod_h + curve_h - 1);
+                frustum(cavity_lb, cavity_lt, rod_h + cap_t + curve_h - 1);
                 cylinder(r = cap_t, h = 1);
             }
-            translate([0, 0, curve_r + rod_h + cap_t])
+            translate([0, 0, rod_h + cap_t + curve_r])
                 rotate([90, 0, 0])
                     cylinder(r = curve_r, h = cap_lb, center = true);
         }
