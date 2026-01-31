@@ -1,6 +1,7 @@
 #include "bsp/board_api.h"
 #include "hardware/gpio.h"
 
+#include "layout.h"
 #include "keyboard.h"
 
 void kbd_init(void) {
@@ -22,6 +23,13 @@ bool kbd_update(uint8_t *keycodes) {
         keycodes[i] = 0;
     }
 
+    const uint8_t (*cur_layout)[N_ROWS][N_COLS] = &layout;
+    gpio_put(row_to_gpio[fn_row], 0);
+    sleep_us(5);
+    if (gpio_get(col_to_gpio[fn_col]) == 0) {
+        cur_layout = &layout_fn;
+    }
+
     uint8_t index = 0;
     bool changed = false;
     for (size_t i = 0; i < N_ROWS; i++) {
@@ -36,7 +44,7 @@ bool kbd_update(uint8_t *keycodes) {
             if (gpio_get(col_to_gpio[j]) != 0)
                 continue;
 
-            keycodes[index] = layout[i][j];
+            keycodes[index] = (*cur_layout)[i][j];
             changed = true;
             index++;
             if (index >= 6) {

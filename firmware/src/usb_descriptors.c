@@ -24,7 +24,6 @@
  */
 
 #include "bsp/board_api.h"
-#include "tusb.h"
 #include "usb_descriptors.h"
 
 /* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
@@ -131,7 +130,7 @@ enum {
 // array of pointer to string descriptors
 static char const *string_desc_arr[] = {
     (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-    "Swiniarski",                  // 1: Manufacturer
+    "swiniarski.org",              // 1: Manufacturer
     "Crude-59",                    // 2: Product
     NULL,                          // 3: Serials will use unique ID if possible
 };
