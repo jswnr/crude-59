@@ -1,3 +1,9 @@
+/*
+ * Copyright © 2026 Jakub Świniarski
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
 #include "bsp/board_api.h"
 #include "hardware/gpio.h"
 

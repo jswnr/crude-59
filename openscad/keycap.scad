@@ -1,13 +1,16 @@
-// --- config --- //
-$fn     = 100;
-stem_l  = 4;
-stem_h  = 3.6;
-stem_th = 1.1;
-stem_tv = 1.3;
-extra_h = 4;
-cap_t   = 1.2;
-// -------------- //
+/*
+ * Copyright © 2026 Jakub Świniarski
+ *
+ * SPDX-License-Identifier: CERN-OHL-S-2.0
+ */
 
+$fn        = 100;
+stem_l     = 4;
+stem_h     = 3.6;
+stem_th    = 1.1;
+stem_tv    = 1.3;
+extra_h    = 4;
+cap_t      = 1.2;
 margin     = 0.05;
 rod_hole_h = stem_h + 1;
 rod_h      = rod_hole_h + extra_h;

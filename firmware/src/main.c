@@ -1,4 +1,10 @@
 /*
+ * Copyright © 2026 Jakub Świniarski
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Ha Thach (tinyusb.org)
@@ -25,8 +31,6 @@
 
 #include "bsp/board_api.h"
 #include "tusb.h"
-
-#include "usb_descriptors.h"
 
 #include "keyboard.h"
 
@@ -85,12 +89,12 @@ static void send_hid_report(bool key_pressed) {
     static bool send_empty = false;
 
     if (key_pressed) {
-        tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, keycodes);
+        tud_hid_keyboard_report(1, 0, keycodes);
         send_empty = true;
     } else {
         // send empty key report if previously has key pressed
         if (send_empty) {
-            tud_hid_keyboard_report(REPORT_ID_KEYBOARD, 0, NULL);
+            tud_hid_keyboard_report(1, 0, NULL);
         }
         send_empty = false;
     }

@@ -1,4 +1,10 @@
 /*
+ * Copyright © 2026 Jakub Świniarski
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+/*
  * The MIT License (MIT)
  *
  * Copyright (c) 2019 Ha Thach (tinyusb.org)
@@ -24,7 +30,6 @@
  */
 
 #include "bsp/board_api.h"
-#include "usb_descriptors.h"
 
 /* A combination of interfaces must have a unique product id, since PC will save device driver after the first plug.
  * Same VID/PID with different interface e.g MSC (first), then CDC (later) will possibly cause system error on PC.
@@ -73,7 +78,7 @@ uint8_t const * tud_descriptor_device_cb(void) {
 //--------------------------------------------------------------------+
 
 uint8_t const desc_hid_report[] = {
-    TUD_HID_REPORT_DESC_KEYBOARD( HID_REPORT_ID(REPORT_ID_KEYBOARD)),
+    TUD_HID_REPORT_DESC_KEYBOARD( HID_REPORT_ID(1)),
 };
 
 // Invoked when received GET HID REPORT DESCRIPTOR
@@ -130,9 +135,9 @@ enum {
 // array of pointer to string descriptors
 static char const *string_desc_arr[] = {
     (const char[]) { 0x09, 0x04 }, // 0: is supported language is English (0x0409)
-    "swiniarski.org",              // 1: Manufacturer
-    "Crude-59",                    // 2: Product
-    NULL,                          // 3: Serials will use unique ID if possible
+    "swiniarski.org",                      // 1: Manufacturer
+    "Crude-59",                            // 2: Product
+    NULL,                                  // 3: Serials will use unique ID if possible
 };
 
 static uint16_t _desc_str[32 + 1];

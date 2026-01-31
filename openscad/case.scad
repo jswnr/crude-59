@@ -1,12 +1,15 @@
-// --- config --- //
-$fn      = 100;
-pcb_t    = 1.2;
-insert_d = 3.5;
-thread_l = 6;
-extra_h  = 5;
-case_t   = 2.5;
-// -------------- //
+/*
+ * Copyright © 2026 Jakub Świniarski
+ *
+ * SPDX-License-Identifier: CERN-OHL-S-2.0
+ */
 
+$fn        = 100;
+pcb_t      = 1.2;
+insert_d   = 3.5;
+thread_l   = 6;
+extra_h    = 5;
+case_t     = 2.5;
 pcb_l      = 244;
 pcb_w      = 92;
 margin     = 0.5;

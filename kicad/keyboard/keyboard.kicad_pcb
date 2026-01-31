@@ -36022,6 +36022,30 @@
 		(layer "Edge.Cuts")
 		(uuid "f8ab124f-4d00-4e0b-aca3-d4b51ca5fc77")
 	)
+	(gr_text "Copyright © 2026 Jakub Świniarski"
+		(at 271 90 270)
+		(layer "B.SilkS")
+		(uuid "85e93727-ac88-4724-b8a7-20d6493f2e02")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+			(justify left bottom mirror)
+		)
+	)
+	(gr_text "Copyright © 2026 Jakub Świniarski\n\nSPDX-License-Identifier: CERN-OHL-S-2.0"
+		(at 230.5 176 0)
+		(layer "User.1")
+		(uuid "e551a969-e4da-4568-8691-9f48746320a9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.125)
+			)
+			(justify bottom)
+		)
+	)
 	(segment
 		(start 244.6525 81.5)
 		(end 47.75 81.5)
