@@ -5,6 +5,15 @@ A 59-key USB keyboard built using Raspberry Pi Pico
 ![Final](images/final.jpg)
 ![No keycaps](images/no_keycaps.jpg)
 
+## Default layout
+|         |       |       |       |       |       |       |       |       |       |        |       |                  |
+|---------|-------|-------|-------|-------|-------|-------|-------|-------|-------|--------|-------|------------------|
+| \`~     | 1! F1 | 2@ F2 | 3# F3 | 4$ F4 | 5% F5 | 6^ F6 | 7& F7 | 8* F8 | 9( F9 | 0) F10 |       |                  |
+| Tab     | Q     | W ↑   | E     | R     | T     | Y     | U     | I     | O     | P  F11 |       |                  |
+| Esc     | A ←   | S ↓   | D →   | F     | G     | H     | J     | K     | L     | ;: F12 |       |                  | 
+| Shift   | Z     | X     | C     | V     | B     | N     | M     | ,<    | .>    | '"     | Enter | Backspace Delete |
+| Control | Super | Fn    | Alt   | Space | Space | Alt   | [{    | ]}    | /?    | \\\|   | -_    | =+               |
+
 ## Bill of materials
 | Name                   | Details                          | Quantity |
 |------------------------|----------------------------------|----------|
