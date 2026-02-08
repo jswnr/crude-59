@@ -22,6 +22,7 @@ A 59-key USB keyboard built using Raspberry Pi Pico
 | PCB                    | 1.2 mm thickness                 | 1        |
 | Raspberry Pi Pico      |                                  | 1        |
 | USB-A to Micro-B cable |                                  | 1        |
+| Male pin header        | 2.54 mm pitch, 20 pins           | 2        |
 | M2 screw               | Pan head, 6 mm long              | 8        |
 | M2 brass insert        | 6 mm long, 3.5 mm outer diameter | 8        |
 | Cherry MX switch       |                                  | 59       |
