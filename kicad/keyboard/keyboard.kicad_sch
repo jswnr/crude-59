@@ -1366,7 +1366,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Copyright © 2026 Jakub Świniarski\n\nSPDX-License-Identifier: CERN-OHL-S-2.0"
+	(text "© 2026 Jakub Świniarski\n\nSPDX-License-Identifier: CERN-OHL-S-2.0"
 		(exclude_from_sim no)
 		(at 232.664 173.482 0)
 		(effects

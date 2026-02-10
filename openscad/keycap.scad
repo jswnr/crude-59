@@ -1,5 +1,5 @@
 /*
- * Copyright © 2026 Jakub Świniarski
+ * © 2026 Jakub Świniarski
  *
  * SPDX-License-Identifier: CERN-OHL-S-2.0
  */
