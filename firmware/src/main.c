@@ -31,15 +31,18 @@
 
 #include "bsp/board_api.h"
 #include "tusb.h"
+#include "hardware/clocks.h"
 
 #include "keyboard.h"
 
 void hid_task(void);
+
 uint8_t keycodes[6] = { 0 };
 
-/*------------- MAIN -------------*/
 int main(void) {
     board_init();
+
+    set_sys_clock_khz(48000, true);
 
     // init device stack on configured roothub port
     tusb_rhport_init_t dev_init = {.role = TUSB_ROLE_DEVICE, .speed = TUSB_SPEED_AUTO};
@@ -70,6 +73,7 @@ void tud_umount_cb(void) {}
 // Within 7ms, device must draw an average of current less than 2.5 mA from bus
 void tud_suspend_cb(bool remote_wakeup_en) {
     (void)remote_wakeup_en;
+    __wfi();
 }
 
 // Invoked when usb bus is resumed
