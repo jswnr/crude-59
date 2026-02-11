@@ -7,7 +7,7 @@
 #ifndef LAYOUT_H
 #define LAYOUT_H
 
-#include "class/hid/hid.h"
+#include <class/hid/hid.h>
 
 #define N_COLS 13
 #define N_ROWS 5

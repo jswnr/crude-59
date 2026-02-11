@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-#include "bsp/board_api.h"
-#include "hardware/gpio.h"
+#include <bsp/board_api.h>
+#include <hardware/gpio.h>
 
 #include "layout.h"
 #include "keyboard.h"

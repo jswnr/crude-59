@@ -29,9 +29,10 @@
  *
  */
 
-#include "bsp/board_api.h"
-#include "tusb.h"
-#include "hardware/clocks.h"
+#include <bsp/board_api.h>
+#include <tusb.h>
+#include <hardware/clocks.h>
+#include <hardware/structs/clocks.h>
 
 #include "keyboard.h"
 
@@ -44,8 +45,12 @@ int main(void) {
 
     set_sys_clock_khz(48000, true);
 
+    clock_stop(clk_adc);
+    clock_stop(clk_rtc);
+    clock_stop(clk_peri);
+
     // init device stack on configured roothub port
-    tusb_rhport_init_t dev_init = {.role = TUSB_ROLE_DEVICE, .speed = TUSB_SPEED_AUTO};
+    tusb_rhport_init_t dev_init = {.role = TUSB_ROLE_DEVICE, .speed = TUSB_SPEED_LOW};
     tusb_init(BOARD_TUD_RHPORT, &dev_init);
 
     board_init_after_tusb();
